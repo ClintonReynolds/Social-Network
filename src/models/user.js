@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const userSchema = new Schema({
-    userName: {
+    username: {
         type: String,
         unique: true,
         required: true,
@@ -23,6 +23,7 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
     },
+}, {
     toJSON: {
         virtuals: true,
         getters: true,

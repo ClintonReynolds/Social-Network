@@ -1,4 +1,4 @@
-import User from '../models';
+import { User, Thought } from '../models/index.js';
 
 export const createUser = async (req, res) => {
   const user = new User(req.body);
@@ -54,7 +54,8 @@ export const deleteUser = async (req, res) => {
         if (!user) {
             res.status(404).json({ message: 'No user found with this ID' });
         } else {
-            res.json({ message: 'User deleted successfully' });
+            await Thought.deleteMany({ username: user.username });
+            res.status(200).json({ message: 'User and associated thoughts deleted successfully' });
         }
     } catch (err) {
         res.status(500).json(err);

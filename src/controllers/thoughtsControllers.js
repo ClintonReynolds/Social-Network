@@ -1,16 +1,24 @@
-import { Thought, User } from '../models';
+import { Thought, User } from '../models/index.js';
 
 export const createThought = async (req, res) => {
     const thought = new Thought(req.body);
     try {
         await thought.save();
+        const user= await User.findByIdAndUpdate(
+            thought.userId,
+            { $addToSet: { thoughts: thought._id } },
+            { new: true }
+        );
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }   
         res.status(201).json(thought);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
     }
 
-export const getAllThoughts = async (req, res) => {
+export const getAllThoughts = async (_req, res) => {
     try {
         const thoughts = await Thought.find();
         res.status(200).json(thoughts);
@@ -54,6 +62,14 @@ export const deleteThought = async (req, res) => {
         if (!thought) {
             res.status(404).json({ message: 'No thought found with this ID' });
         } else {
+            const user = await User.findByIdAndUpdate(
+                thought.userId,
+                { $pull: { thoughts: thought._id } },
+                { new: true }
+            );
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
             res.json({ message: 'Thought deleted successfully' });
         }
     } catch (err) {
@@ -77,7 +93,7 @@ export const addReaction = async (req, res) => {
     }
 }
 
-export const removeReaction = async (req, res) => {
+export const deleteReaction = async (req, res) => {
     try {
         const thought = await Thought.findByIdAndUpdate(
             req.params.thoughtId,

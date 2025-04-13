@@ -1,19 +1,19 @@
 import { Router } from 'express';
-import { getAllUsers, getUserById, createUser, updateUser,deleteUser, addFriend, removeFriend } from '../../controllers/userControllers';
+import { getAllUsers, getUserById, createUser, updateUser,deleteUser, addFriend, removeFriend } from '../../controllers/userControllers.js';
 
 const router = Router();
 
-userRouter.get('/')
+router.route('/')
  .get(getAllUsers)
  .post(createUser);
 
-userRouter.get('/:userId')
- .get(getUser)
+router.route('/:userId')
+ .get(getUserById)
  .put(updateUser)
  .delete(deleteUser);
 
-userRouter.post('/:userId/friends/:friendId')
+router.route('/:userId/friends/:friendId')
     .post(addFriend)
     .delete(removeFriend);
  
-    export default userRouter;
+    export default Router;
