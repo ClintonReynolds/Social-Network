@@ -1,9 +1,46 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types, } from "mongoose";
 import { formatTimestamp } from "../utils/timeStamp.js";
-import reactionSchema from "./reaction.js";
+
+
+const reactionSchema = new Schema(
+    {
+        _id: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId(),
+        },
+        reactionId: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId(),
+        },
+        reactionBody: {
+            type: String,
+            required: true,
+            maxlength: 280,
+        },
+        username: {
+            type: String,
+            required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: (timestamp) => formatTimestamp(timestamp),
+        },
+    },
+    {
+        toJSON: {
+            getters: true,
+        },
+        id: false,
+    }
+);
 
 const thoughtSchema = new Schema(
     {
+        _id: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId(),
+        },
         thoughtText: {
         type: String,
         required: true,

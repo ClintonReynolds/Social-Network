@@ -1,11 +1,11 @@
 import { Thought, User } from '../models/index.js';
 
 export const createThought = async (req, res) => {
-    const thought = new Thought(req.body);
+    
     try {
-        await thought.save();
-        const user= await User.findByIdAndUpdate(
-            thought.userId,
+      const thought = await Thought.create(req.body);  
+        const user= await User.findOneAndUpdate(
+            { username: req.body.username},
             { $addToSet: { thoughts: thought._id } },
             { new: true }
         );
@@ -29,7 +29,7 @@ export const getAllThoughts = async (_req, res) => {
 
 export const getThoughtById = async (req, res) => {
     try {
-        const thought = await Thought.findById(req.params.id);
+        const thought = await Thought.findById(req.params.thoughtId);
         if (!thought) {
             return res.status(404).json({ message: 'Thought not found' });
         }

@@ -1,16 +1,15 @@
 import { User, Thought } from '../models/index.js';
 
 export const createUser = async (req, res) => {
-  const user = new User(req.body);
   try {
-    await user.save();
+    const user= await User.create(req.body);
     res.status(201).json(user);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 }
 
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async (_req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);

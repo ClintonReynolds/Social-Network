@@ -16,4 +16,4 @@ router.route('/:userId/friends/:friendId')
     .post(addFriend)
     .delete(removeFriend);
  
-    export default Router;
+    export default router;

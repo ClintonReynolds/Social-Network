@@ -1,6 +1,10 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Types } from 'mongoose';
 
 const userSchema = new Schema({
+    _id: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId(),
+    },
     username: {
         type: String,
         unique: true,
@@ -12,26 +16,29 @@ const userSchema = new Schema({
         required: true,
         unique: true,
         trim: true,
-        validate: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-, 'Please enter a valid email address'],
+        match: [/.+@.+\..+/, 'Please enter a valid e-mail address'],
     },  
-    thoughts: {
+    thoughts: [{
         type: Schema.Types.ObjectId,
         ref: 'Thought',
-    },
-    friends: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    },
+    },],
+    friends: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
 }, {
     toJSON: {
         virtuals: true,
         getters: true,
 },
+    id: false,
 })
     userSchema.virtual('friendCount').get(function () {
-    return this.friends.length;
+    return this.friends?.length;
 });
 
     const User = model('User', userSchema);
+    
     export default User;
