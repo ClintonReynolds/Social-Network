@@ -43,5 +43,5 @@ If you have any questions, please contact me at [Eastwood18809@gmail.com](mailto
 
 link to repo : https://github.com/ClintonReynolds/Social-Network.git
 
-link to Video Demo : 
+link to Video Demo : [Click here to view the walkthrough video](https://drive.google.com/file/d/14iF7EEyjAsNDanUqbx60eZA5vTcd2AB5/view?usp=sharing)
 
