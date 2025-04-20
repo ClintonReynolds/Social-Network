@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/badge/license-MIT-brightgreen)
 
 ## Description
-A scalable and modular RESTful API for a social networking platform, built using **TypeScript** and Mongo_DB designed with extensibility and performance in mind. This backend service allows users to create profiles, post updates, follow other users, and interact via likes and comments.
+A scalable and modular RESTful API for a social networking platform, built using node.js, express and Mongo_DB designed with extensibility and performance in mind. This backend service allows users to create profiles, post updates, follow other users, and interact via likes and comments.
 
 
 ## Table of Contents
