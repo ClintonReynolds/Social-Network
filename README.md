@@ -31,7 +31,8 @@ View individual Thoughts.
 Add and remove reactions to thoughts.
 
 ## License
-This project is licensed under the [MIT]([License](https://opensource.org/licenses/MIT)) license.
+This project is licensed under the MIT License license.
+      For more info, click on the link: (https://opensource.org/licenses/MIT)
 
 ## Contributing
 I am the sole contributor to this project. If you would like to add to the project please reach out. 
